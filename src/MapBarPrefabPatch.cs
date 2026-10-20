@@ -7,11 +7,16 @@ namespace DaysOfFood
 {
     /// <summary>
     /// Swaps each value text in SandBox's MapBar prefab for DofMapBarValueTextWidget, keeping every attribute,
-    /// and binds its DofBlinkReds to FoodColorMixin.
+    /// binds its switches to FoodColorMixin, and gives it a hidden separator line centered between two text lines.
     /// </summary>
     [PrefabExtension("MapBar", "descendant::MapBarCustomValueTextWidget")]
     public sealed class MapBarPrefabPatch : CustomPatch<XmlDocument>
     {
+        private const string Separator =
+            "<Children><Widget Id=\"" + DofMapBarValueTextWidget.SeparatorId + "\" IsVisible=\"false\" DoNotAcceptEvents=\"true\" " +
+            "WidthSizePolicy=\"StretchToParent\" HeightSizePolicy=\"Fixed\" SuggestedHeight=\"2\" VerticalAlignment=\"Center\" " +
+            "MarginLeft=\"2\" MarginRight=\"2\" Sprite=\"BlankWhiteSquare_9\" Color=\"#F4E1C499\" /></Children>";
+
         public override string Id => "DaysOfFoodMapBar";
 
         public override void Apply(XmlDocument document)
@@ -23,8 +28,8 @@ namespace DaysOfFood
                 foreach (XmlAttribute attribute in old.Attributes)
                     widget.SetAttribute(attribute.Name, attribute.Value);
                 widget.SetAttribute("DofBlinkReds", "@DofBlinkReds");
-                while (old.HasChildNodes)
-                    widget.AppendChild(old.FirstChild);
+                widget.SetAttribute("DofSeparator", "@DofSeparator");
+                widget.InnerXml = Separator;
                 old.ParentNode.ReplaceChild(widget, old);
             }
         }

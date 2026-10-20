@@ -6,23 +6,26 @@ using TaleWorlds.Library;
 namespace DaysOfFood
 {
     /// <summary>
-    /// Adds DofBlinkReds to the map bar items, for DofMapBarValueTextWidget to bind to. Only the food item's
-    /// value ever changes.
+    /// Adds DofBlinkReds and DofSeparator to the map bar items, for DofMapBarValueTextWidget to bind to. Only the
+    /// food item's values ever change.
     /// </summary>
     [ViewModelMixin]
     public sealed class FoodColorMixin : BaseViewModelMixin<MapInfoItemVM>
     {
         private static FoodColorMixin _food;
         private bool _blinkReds;
+        private bool _separator;
 
         public FoodColorMixin(MapInfoItemVM vm) : base(vm)
         {
             if (vm?.ItemId == "food") _food = this;
         }
 
-        public static void SetFoodBlinkReds(bool on)
+        public static void SetFood(bool blinkReds, bool separator)
         {
-            if (_food != null) _food.DofBlinkReds = on;
+            if (_food == null) return;
+            _food.DofBlinkReds = blinkReds;
+            _food.DofSeparator = separator;
         }
 
         [DataSourceProperty]
@@ -34,6 +37,18 @@ namespace DaysOfFood
                 if (value == _blinkReds) return;
                 _blinkReds = value;
                 OnPropertyChangedWithValue(value, nameof(DofBlinkReds));
+            }
+        }
+
+        [DataSourceProperty]
+        public bool DofSeparator
+        {
+            get => _separator;
+            set
+            {
+                if (value == _separator) return;
+                _separator = value;
+                OnPropertyChangedWithValue(value, nameof(DofSeparator));
             }
         }
 

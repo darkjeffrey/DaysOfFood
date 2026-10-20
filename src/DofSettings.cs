@@ -51,6 +51,11 @@ namespace DaysOfFood
         [SettingPropertyGroup(General, GroupOrder = 0)]
         public bool ShowDecimal { get; set; } = false;
 
+        [SettingPropertyBool("{=dof_mcm_ShowFoodAmount}Also show the food amount", Order = 2, RequireRestart = false,
+            HintText = "{=dof_mcm_ShowFoodAmount_hint}Show the vanilla food amount above the days left, on two lines with a line between them.")]
+        [SettingPropertyGroup(General, GroupOrder = 0)]
+        public bool ShowFoodAmount { get; set; } = false;
+
         [SettingPropertyInteger("{=dof_mcm_RedDays}Red at (days or less)", 0, 30, "0", Order = 0, RequireRestart = false,
             HintText = "{=dof_mcm_RedDays_hint}The number turns red when this many whole days of food or fewer are left. 0 means only when less than one day is left.")]
         [SettingPropertyGroup(Colors, GroupOrder = 1)]

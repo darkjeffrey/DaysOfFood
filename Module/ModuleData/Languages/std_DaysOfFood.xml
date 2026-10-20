@@ -17,6 +17,8 @@
     <string id="dof_mcm_Enabled_hint" text="Show how many days your food will last on the campaign map bar instead of how many food items you carry. Off: the vanilla food count comes back at the next map bar refresh." />
     <string id="dof_mcm_ShowDecimal" text="Show tenths of a day" />
     <string id="dof_mcm_ShowDecimal_hint" text="On: show 4.5d. Off: show whole days only (4d), rounded down, so 4d means at least 4 full days." />
+    <string id="dof_mcm_ShowFoodAmount" text="Also show the food amount" />
+    <string id="dof_mcm_ShowFoodAmount_hint" text="Show the vanilla food amount above the days left, on two lines with a line between them." />
     <string id="dof_mcm_RedDays" text="Red at (days or less)" />
     <string id="dof_mcm_RedDays_hint" text="The number turns red when this many whole days of food or fewer are left. 0 means only when less than one day is left." />
     <string id="dof_mcm_BlinkDays" text="Blinking red at (days or less)" />

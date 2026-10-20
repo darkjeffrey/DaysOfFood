@@ -17,7 +17,8 @@ namespace DaysOfFood
     /// <summary>
     /// Shows days of food instead of the food count on the campaign map bar. Vanilla MapInfoVM.UpdatePlayerInfo
     /// rewrites the food item at every map bar refresh, so the postfix rewrites its text and warning right after.
-    /// IntValue (the food count) is left alone: it only drives the short flash when food goes up or down.
+    /// IntValue (the food amount) is left alone: it drives the short flash when food goes up or down, and the
+    /// optional second line.
     /// </summary>
     [HarmonyPatch(typeof(MapInfoVM))]
     internal static class FoodDaysDisplay
@@ -54,7 +55,7 @@ namespace DaysOfFood
             {
                 // Vanilla has already written its own text and warning; only our color needs undoing.
                 _level = FoodLevel.Normal;
-                FoodColorMixin.SetFoodBlinkReds(false);
+                FoodColorMixin.SetFood(false, false);
                 return;
             }
 
@@ -66,13 +67,15 @@ namespace DaysOfFood
                 : wholeDays <= settings.RedDays ? FoodLevel.Low
                 : FoodLevel.Normal;
 
-            item.Value = Format(days, settings.ShowDecimal);
+            // Vanilla has just set IntValue to the food amount.
+            string daysText = Format(days, settings.ShowDecimal);
+            item.Value = settings.ShowFoodAmount ? item.IntValue + "\n" + daysText : daysText;
             item.HasWarning = _level == FoodLevel.Low || (_level == FoodLevel.Critical && BlinkIsRed());
-            FoodColorMixin.SetFoodBlinkReds(_level == FoodLevel.Critical && settings.BlinkDarkRed);
+            FoodColorMixin.SetFood(_level == FoodLevel.Critical && settings.BlinkDarkRed, settings.ShowFoodAmount);
             FoodAlerts.OnLevel(_level, wholeDays);
 
             // Log only when what the player sees changes; the food amount itself drops a little at every refresh.
-            string shown = item.Value + " " + _level;
+            string shown = item.Value.Replace("\n", " / ") + " " + _level;
             if (settings.DebugMessages && shown != _lastDebug)
             {
                 _lastDebug = shown;

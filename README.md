@@ -16,6 +16,7 @@ Nothing is stored in your save, so you can add or remove the mod mid-campaign.
 |---|---|---|
 | Enable | On | Off brings back the vanilla food count. |
 | Show tenths of a day | Off | 4.5d instead of 4d. |
+| Also show the food amount | Off | The vanilla food amount above the days, with a line between them. |
 | Red at (days or less) | 3 | 0 means less than one day. |
 | Blinking red at (days or less) | 1 | Wins over plain red. |
 | Blink speed (seconds) | 0.5 | Length of each half of a blink. |

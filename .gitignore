@@ -11,3 +11,6 @@ release/
 *.user
 *.suo
 .vscode/
+
+# Private working notes
+handoff.md
