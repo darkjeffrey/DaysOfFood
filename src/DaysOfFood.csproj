@@ -5,7 +5,7 @@
     <LangVersion>9.0</LangVersion>
     <AssemblyName>DaysOfFood</AssemblyName>
     <RootNamespace>DaysOfFood</RootNamespace>
-    <Version>1.0.1</Version>
+    <Version>1.0.2</Version>
     <Platforms>x64</Platforms>
     <PlatformTarget>x64</PlatformTarget>
     <AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>

@@ -44,6 +44,14 @@ Mods that replace the whole `MapBar` prefab may conflict.
 
 Run `dotnet build -c Release` in `src`. The build installs the mod into `Modules\DaysOfFood` in the game folder; pass `/p:GameFolder="..."` if the game isn't in the default Steam location.
 
+## Releasing
+
+1. Add a `## <version>` section to `CHANGELOG.md`, run `bltools.py bump DaysOfFood <version>`, rebuild and push.
+2. Run `bltools.py package DaysOfFood` to make `release/DaysOfFood-v<version>.zip`.
+3. Publish a GitHub Release tagged `v<version>` with that zip attached. The "Publish to Nexus Mods" workflow then uploads it to Nexus as the new version of the main file, with the changelog section as its changelog. It stops if the tag, `SubModule.xml` and the zip don't have the same version.
+
+The workflow needs the repository secret `NEXUS_API_KEY` (your personal key from Nexus Mods' API keys page).
+
 ## Translations
 
 All English text is in the code as `{=id}English`. `Module/ModuleData/Languages/std_DaysOfFood.xml` lists every string. To translate, add a language folder (for example `DE`) with a `language_data.xml` and a copy of that file with each `text` translated, keeping the ids and `{VARIABLES}`.
