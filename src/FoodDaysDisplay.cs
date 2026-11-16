@@ -55,7 +55,7 @@ namespace DaysOfFood
             {
                 // Vanilla has already written its own text and warning; only our color needs undoing.
                 _level = FoodLevel.Normal;
-                FoodColorMixin.SetFood(false, false);
+                FoodBarMixin.SetFood(false, false);
                 return;
             }
 
@@ -71,7 +71,7 @@ namespace DaysOfFood
             string daysText = Format(days, settings.ShowDecimal);
             item.Value = settings.ShowFoodAmount ? item.IntValue + "\n" + daysText : daysText;
             item.HasWarning = _level == FoodLevel.Low || (_level == FoodLevel.Critical && BlinkIsRed());
-            FoodColorMixin.SetFood(_level == FoodLevel.Critical && settings.BlinkDarkRed, settings.ShowFoodAmount);
+            FoodBarMixin.SetFood(_level == FoodLevel.Critical && settings.BlinkDarkRed, settings.ShowFoodAmount);
             FoodAlerts.OnLevel(_level, wholeDays);
 
             // Log only when what the player sees changes; the food amount itself drops a little at every refresh.

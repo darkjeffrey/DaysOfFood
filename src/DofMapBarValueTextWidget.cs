@@ -6,7 +6,7 @@ using TaleWorlds.MountAndBlade.GauntletUI.Widgets.Map.MapBar;
 namespace DaysOfFood
 {
     /// <summary>
-    /// The vanilla map bar value text, plus two switches bound to FoodColorMixin. Values without the bindings keep
+    /// The vanilla map bar value text, plus two switches bound to FoodBarMixin. Values without the bindings keep
     /// both off.
     /// DofBlinkReds: the normal and warning colors become dark and bright red, so toggling the warning blinks
     /// between them.

@@ -1,6 +1,6 @@
 # Days of Food
 
-A Mount & Blade II: Bannerlord mod (v1.4.8) that shows how many **days your food will last** on the campaign map bar, for example **12d**, instead of how many food items you carry.
+A Mount & Blade II: Bannerlord mod (v1.5.7) that shows how many **days your food will last** on the campaign map bar, for example **12d**, instead of how many food items you carry.
 
 - **Red** when food runs low (3 days or less by default).
 - **Blinking dark and bright red** when it's nearly gone (1 day or less by default). It keeps blinking while the game is paused.
@@ -35,7 +35,7 @@ Bannerlord.Harmony, ButterLib, UIExtenderEx and Mod Configuration Menu v5. Load 
 |---|---|
 | `FoodDaysDisplay.cs` | Harmony postfixes on `MapInfoVM`: writes the days text and red warning after each map bar refresh, and flips the warning every frame to blink. |
 | `FoodAlerts.cs` | The announcement and map notification. The notification only goes to the map's notification list, never to the campaign's saved notices. |
-| `MapBarPrefabPatch.cs`, `DofMapBarValueTextWidget.cs`, `FoodColorMixin.cs` | UIExtenderEx swaps the map bar's value text for a subclass that can switch to dark/bright red, bound to a property only the food item sets. Every other value keeps its vanilla colors. |
+| `MapBarPrefabPatch.cs`, `DofMapBarValueTextWidget.cs`, `FoodBarMixin.cs` | UIExtenderEx swaps the map bar's value text for a subclass that can switch to dark/bright red, bound to a property only the food item sets. Every other value keeps its vanilla colors. |
 | `DofSettings.cs` | The MCM page. |
 
 Mods that replace the whole `MapBar` prefab may conflict.

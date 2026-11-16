@@ -10,22 +10,22 @@ namespace DaysOfFood
     /// food item's values ever change.
     /// </summary>
     [ViewModelMixin]
-    public sealed class FoodColorMixin : BaseViewModelMixin<MapInfoItemVM>
+    public sealed class FoodBarMixin : BaseViewModelMixin<MapInfoItemVM>
     {
-        private static FoodColorMixin _food;
+        private static FoodBarMixin _foodItem;
         private bool _blinkReds;
         private bool _separator;
 
-        public FoodColorMixin(MapInfoItemVM vm) : base(vm)
+        public FoodBarMixin(MapInfoItemVM vm) : base(vm)
         {
-            if (vm?.ItemId == "food") _food = this;
+            if (vm?.ItemId == "food") _foodItem = this;
         }
 
         public static void SetFood(bool blinkReds, bool separator)
         {
-            if (_food == null) return;
-            _food.DofBlinkReds = blinkReds;
-            _food.DofSeparator = separator;
+            if (_foodItem == null) return;
+            _foodItem.DofBlinkReds = blinkReds;
+            _foodItem.DofSeparator = separator;
         }
 
         [DataSourceProperty]
@@ -55,7 +55,7 @@ namespace DaysOfFood
         public override void OnFinalize()
         {
             base.OnFinalize();
-            if (_food == this) _food = null;
+            if (_foodItem == this) _foodItem = null;
         }
     }
 }

@@ -16,21 +16,21 @@ namespace DaysOfFood
     [HarmonyPatch(typeof(MapNotificationVM))]
     internal static class FoodAlerts
     {
-        private static FoodLevel _alerted;
+        private static FoodLevel _alertedLevel;
         private static Campaign _campaign;
         private static MapNotificationVM _notifications;
-        private static MapNotificationItemBaseVM _shown;
+        private static MapNotificationItemBaseVM _shownNotification;
 
         public static void OnLevel(FoodLevel level, int wholeDays)
         {
             if (!ReferenceEquals(_campaign, Campaign.Current)) // new game or loaded save: alert again
             {
                 _campaign = Campaign.Current;
-                _alerted = FoodLevel.Normal;
+                _alertedLevel = FoodLevel.Normal;
             }
 
-            FoodLevel previous = _alerted;
-            _alerted = level;
+            FoodLevel previous = _alertedLevel;
+            _alertedLevel = level;
             if (level <= previous) return;
 
             TextObject message = Message(level == FoodLevel.Critical, wholeDays);
@@ -60,12 +60,12 @@ namespace DaysOfFood
             if (_notifications == null) return;
 
             // Keep a single food notification: replace the previous one.
-            if (_shown != null && _notifications.NotificationItems.Contains(_shown))
-                _shown.ExecuteRemove();
+            if (_shownNotification != null && _notifications.NotificationItems.Contains(_shownNotification))
+                _shownNotification.ExecuteRemove();
 
             var data = new LowFoodNotification(message, critical);
             _notifications.AddMapNotification(data);
-            _shown = _notifications.NotificationItems.FirstOrDefault(item => item.Data == data);
+            _shownNotification = _notifications.NotificationItems.FirstOrDefault(item => item.Data == data);
         }
 
         /// <summary>The map's notification list fills its data-to-item type table here; add ours.</summary>
@@ -88,7 +88,7 @@ namespace DaysOfFood
         {
             if (_notifications != __instance) return;
             _notifications = null;
-            _shown = null;
+            _shownNotification = null;
         }
     }
 

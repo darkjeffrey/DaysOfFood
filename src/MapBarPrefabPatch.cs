@@ -7,7 +7,7 @@ namespace DaysOfFood
 {
     /// <summary>
     /// Swaps each value text in SandBox's MapBar prefab for DofMapBarValueTextWidget, keeping every attribute,
-    /// binds its switches to FoodColorMixin, and gives it a hidden separator line centered between two text lines.
+    /// binds its switches to FoodBarMixin, and gives it a hidden separator line centered between two text lines.
     /// </summary>
     [PrefabExtension("MapBar", "descendant::MapBarCustomValueTextWidget")]
     public sealed class MapBarPrefabPatch : CustomPatch<XmlDocument>
